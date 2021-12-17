@@ -1,0 +1,1 @@
+python  D:\web\python\picoin_click\run.py

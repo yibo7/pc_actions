@@ -18,7 +18,7 @@ if __name__ == '__main__':
     y += 200
     pyautogui.moveTo(x, y, duration=1,)
 
-    countNum = 0
+    # countNum = 0
     while True:
         pyautogui.sleep(10)
         # 按钮鼠标左键拖动

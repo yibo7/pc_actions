@@ -3,3 +3,4 @@ class ActionType:
     RightClick = 1
     MiddleClick = 2
     Input = 3
+    dragTo = 4  # 拖拽模式

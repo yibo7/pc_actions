@@ -34,6 +34,8 @@ class ActionRun:
                 # a = pyperclip.paste() 注意，pyperclip.paste只能将内容赋值给一个变量，不能实现真正的粘贴
                 pyautogui.hotkey('ctrl', 'v')
                 pyautogui.sleep(1)
+            elif act['type'] == ActionType.dragTo:
+                pyautogui.dragTo(act['pos'], duration=0.5)
             else:
                 if act['pos'] != self.last_pos:
                     pyautogui.moveTo(act['pos'], duration=0.5)

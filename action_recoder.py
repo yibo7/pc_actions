@@ -23,6 +23,7 @@ class ActionRecoder:
         self.step = 0
         self.actions = []
         self.is_recoding = False
+        self.is_dragTo = False  # 是否切换到拖拽模式，拖拽动作的左键松开时会自动换回 False
 
     def time_span(self):
         """
@@ -68,14 +69,23 @@ class ActionRecoder:
         """
         # print(f"鼠标{button}键在({x}, {y})处{'按下' if is_press else '松开'}")
         if self.is_recoding:
-            if button == Button.left and is_press:
-                self.update_action(x, y, ActionType.LeftClick)
+            if self.is_dragTo:  # 记录拖拽模式
+                if not is_press and button == Button.left:
+                    self.update_action(x, y, ActionType.dragTo)
+                    self.is_dragTo = False
+                    print("结束拖拽")
+                elif button == Button.left and is_press:
+                    print("开始拖拽")
+                    self.update_action(x, y, ActionType.LeftClick)
+            else:
+                if button == Button.left and is_press:
+                    self.update_action(x, y, ActionType.LeftClick)
 
-            elif button == Button.right and is_press:
-                self.update_action(x, y, ActionType.RightClick)
+                elif button == Button.right and is_press:
+                    self.update_action(x, y, ActionType.RightClick)
 
-            elif button == Button.middle and is_press:
-                self.update_action(x, y, ActionType.MiddleClick)
+                elif button == Button.middle and is_press:
+                    self.update_action(x, y, ActionType.MiddleClick)
 
         # if not is_press:
         #     # Stop listener
@@ -124,6 +134,9 @@ class ActionRecoder:
             elif key == Key.f4:
                 self.actions.clear()
                 print("已清空所有动作")
+            elif key == Key.f8:  # 进入拖拽模式
+                self.is_dragTo = True
+                print("进入拖拽模式")
 
         except AttributeError:
             pass
@@ -167,6 +180,7 @@ class ActionRecoder:
 
         print('开始监听键盘')
         print('按下【f10】开始或结束录制')
+        print('按下【f8】切换到拖拽模式')
         print('按下【空格】记录输入')
         with keyboard.Listener(
                 on_press=self.on_press,

@@ -1,6 +1,28 @@
 # PcAction
 鼠标键盘动作记录器
 
+# 一、安装说明
+1、安装所有依赖库
+如果是在项目中运行，打开终端执行：
+>pip install -r requirements.txt
+
+2、如果是在电脑上直接运行或从.bat文件打开
+请确保你的电脑安装有python 3.9及以上
+然后打开cmd命令窗口，cd到本项目的根目录，然后执行：
+>pip install -r requirements.txt
+
+最后你可以这样在cmd中运行：
+>python run.py
+> 
+也可以通过双击bat文件运行：
+
+如果是录制脚本可以打开run_recoder.bat
+
+如果是运行录制好的脚本直接打开run.bat
+
+
+# 二、代码说明
+
 ### run_recoder.py
 运行此脚本可以录制动作
     
